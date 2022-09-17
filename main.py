@@ -15,6 +15,7 @@
 Входные и выходные данные хранятся в отдельных текстовых файлах.
 """
 
+
 # Задача №1
 # with open ('source01', 'r') as file:
 #     source_str = file.read().split()
@@ -22,7 +23,7 @@
 # with open('result01', 'w') as file:
 #     file.write(' '.join([word for word in source_str if 'абв' not in word]))
 
-#Задача №4
+# Задача №4
 def rle_code(data):
     encoding_data = ''
     prev_symbol = ''
@@ -41,8 +42,26 @@ def rle_code(data):
         return encoding_data
 
 
+def rle_decode(data):
+    decode = ''
+    count = ''
+    for symbol in data:
+        if symbol.isdigit():
+            count += symbol
+        else:
+            decode += symbol * int(count)
+            count = ''
+    return decode
+
+
 with open('source04', 'r') as file:
     data_source = file.read()
 
 with open('result04', 'w') as file:
     file.write(rle_code(data_source))
+
+with open('result04', 'r') as file:
+    data_for_decode = file.read()
+
+with open('result04_1', 'w') as file:
+    file.write(rle_decode(data_for_decode))
