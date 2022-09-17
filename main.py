@@ -16,8 +16,33 @@
 """
 
 # Задача №1
-with open ('source01', 'r') as file:
-    source_str = file.read().split()
+# with open ('source01', 'r') as file:
+#     source_str = file.read().split()
+#
+# with open('result01', 'w') as file:
+#     file.write(' '.join([word for word in source_str if 'абв' not in word]))
 
-with open('result01', 'w') as file:
-    file.write(' '.join([word for word in source_str if 'абв' not in word]))
+#Задача №4
+def rle_code(data):
+    encoding_data = ''
+    prev_symbol = ''
+    count = 1
+
+    for symbol in data:
+        if symbol != prev_symbol:
+            if prev_symbol:
+                encoding_data += str(count) + prev_symbol
+            count = 1
+            prev_symbol = symbol
+        else:
+            count += 1
+    else:
+        encoding_data += str(count) + prev_symbol
+        return encoding_data
+
+
+with open('source04', 'r') as file:
+    data_source = file.read()
+
+with open('result04', 'w') as file:
+    file.write(rle_code(data_source))
