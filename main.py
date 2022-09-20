@@ -17,14 +17,18 @@
 
 
 # Задача №1
-# with open ('source01', 'r') as file:
-#     source_str = file.read().split()
-#
-# with open('result01', 'w') as file:
-#     file.write(' '.join([word for word in source_str if 'абв' not in word]))
+with open ('source01', 'r') as file:
+    source_str = file.read().split()
+print(source_str)
+with open('result01', 'w') as file:
+    file.write(' '.join([word for word in source_str if 'abc' not in word]))
 
 # Задача №2
 
+# with open('source02', 'r') as file:
+#     for line in file:
+#         print(line.strip())
+# print('hi')
 
 # Задача №4
 # def rle_code(data):
