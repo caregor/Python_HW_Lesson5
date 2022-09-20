@@ -36,6 +36,14 @@ def check_input(count, candies):
         return False
 
 
+def play_with_bot():
+    bot_value = input('Do you want to play with bot? (yes/no)')
+    if bot_value == 'yes':
+        return True
+    else:
+        return False
+
+
 def step(candy, player1, player2):
     correct_flag = False
     if player1['draw']:
@@ -49,7 +57,14 @@ def step(candy, player1, player2):
             player1['points'] = int(player1['points']) + candy_points_player_one
     else:
         # print("Playes two's step")
-        candy_points_player_two = int(input(f"{player2['name']}, Please! take a candy:"))
+        if player2['bot'] == False:
+            candy_points_player_two = int(input(f"{player2['name']}, Please! take a candy:"))
+        else:
+            if candy > 29:
+                candy_points_player_two = random.randint(1, 28)
+            else:
+                candy_points_player_two = random.randint(1, candy)
+            print(f'Bot takes {candy_points_player_two}')
         correct_flag = check_input(candy, candy_points_player_two)
         candy_points_player_one = 0
         if correct_flag:
@@ -68,11 +83,15 @@ with open('source02', 'r') as file:
         print(line.strip())
 print()
 
-player_one = dict(name='player one', draw=0, points=0)
-player_two = dict(name='player two', draw=0, points=0)
+player_one = dict(name='player one', draw=0, points=0, bot=False)
+player_two = dict(name='player two', draw=0, points=0, bot=False)
 candies = 56
 draw_mark = False
+
+player_two['bot'] = play_with_bot()
+
 while candies > 0:
+
     if not draw_mark:
         print('Choose Who will be first..')
         flip = draw_lots()
