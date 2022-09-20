@@ -23,45 +23,48 @@
 # with open('result01', 'w') as file:
 #     file.write(' '.join([word for word in source_str if 'абв' not in word]))
 
+# Задача №2
+
+
 # Задача №4
-def rle_code(data):
-    encoding_data = ''
-    prev_symbol = ''
-    count = 1
-
-    for symbol in data:
-        if symbol != prev_symbol:
-            if prev_symbol:
-                encoding_data += str(count) + prev_symbol
-            count = 1
-            prev_symbol = symbol
-        else:
-            count += 1
-    else:
-        encoding_data += str(count) + prev_symbol
-        return encoding_data
-
-
-def rle_decode(data):
-    decode = ''
-    count = ''
-    for symbol in data:
-        if symbol.isdigit():
-            count += symbol
-        else:
-            decode += symbol * int(count)
-            count = ''
-    return decode
-
-
-with open('source04', 'r') as file:
-    data_source = file.read()
-
-with open('result04', 'w') as file:
-    file.write(rle_code(data_source))
-
-with open('result04', 'r') as file:
-    data_for_decode = file.read()
-
-with open('result04_1', 'w') as file:
-    file.write(rle_decode(data_for_decode))
+# def rle_code(data):
+#     encoding_data = ''
+#     prev_symbol = ''
+#     count = 1
+#
+#     for symbol in data:
+#         if symbol != prev_symbol:
+#             if prev_symbol:
+#                 encoding_data += str(count) + prev_symbol
+#             count = 1
+#             prev_symbol = symbol
+#         else:
+#             count += 1
+#     else:
+#         encoding_data += str(count) + prev_symbol
+#         return encoding_data
+#
+#
+# def rle_decode(data):
+#     decode = ''
+#     count = ''
+#     for symbol in data:
+#         if symbol.isdigit():
+#             count += symbol
+#         else:
+#             decode += symbol * int(count)
+#             count = ''
+#     return decode
+#
+#
+# with open('source04', 'r') as file:
+#     data_source = file.read()
+#
+# with open('result04', 'w') as file:
+#     file.write(rle_code(data_source))
+#
+# with open('result04', 'r') as file:
+#     data_for_decode = file.read()
+#
+# with open('result04_1', 'w') as file:
+#     file.write(rle_decode(data_for_decode))
