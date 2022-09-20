@@ -14,21 +14,82 @@
 
 Входные и выходные данные хранятся в отдельных текстовых файлах.
 """
+import random
 
 
 # Задача №1
-with open ('source01', 'r') as file:
-    source_str = file.read().split()
-print(source_str)
-with open('result01', 'w') as file:
-    file.write(' '.join([word for word in source_str if 'abc' not in word]))
+# with open ('source01', 'r') as file:
+#     source_str = file.read().split()
+#
+# with open('result01', 'w') as file:
+#     file.write(' '.join([word for word in source_str if 'abc' not in word]))
 
 # Задача №2
+def draw_lots():
+    return random.randint(0, 1)
 
-# with open('source02', 'r') as file:
-#     for line in file:
-#         print(line.strip())
-# print('hi')
+
+def check_input(count, candies):
+    if 0 < candies < 29 and count >= candies:
+        return True
+    else:
+        return False
+
+
+def step(candy, player1, player2):
+    correct_flag = False
+    if player1['draw']:
+        # print("Player one's step")
+        candy_points_player_one = int(input(f"{player1['name']}, Please! take a candy:"))
+        correct_flag = check_input(candy, candy_points_player_one)
+        candy_points_player_two = 0
+        if correct_flag:
+            player1['draw'] = 0
+            player2['draw'] = 1
+            player1['points'] = int(player1['points']) + candy_points_player_one
+    else:
+        # print("Playes two's step")
+        candy_points_player_two = int(input(f"{player2['name']}, Please! take a candy:"))
+        correct_flag = check_input(candy, candy_points_player_two)
+        candy_points_player_one = 0
+        if correct_flag:
+            player1['draw'] = 1
+            player2['draw'] = 0
+            player2['points'] = int(player2['points'] + candy_points_player_two)
+    if correct_flag:
+        return candy - candy_points_player_one - candy_points_player_two
+    else:
+        print('Incorrect takes candy. Read the rules for games. Or you take more candies than exist.')
+        return candy
+
+
+with open('source02', 'r') as file:
+    for line in file:
+        print(line.strip())
+print()
+
+player_one = dict(name='player one', draw=0, points=0)
+player_two = dict(name='player two', draw=0, points=0)
+candies = 56
+draw_mark = False
+while candies > 0:
+    if not draw_mark:
+        print('Choose Who will be first..')
+        flip = draw_lots()
+        draw_mark = True
+        if flip != 0:
+            player_one['draw'] = 1
+            print('The first step will make ', player_one['name'].upper())
+            print()
+        else:
+            print('The first step will make ', player_two['name'].upper())
+            print()
+    candies = step(candies, player_one, player_two)
+    print(candies, 'left')
+if player_one['draw'] != 1:
+    print(f"Player one WINNER!!! and he takes {player_one['points']} candies.")
+else:
+    print(f"Player two WINNER!!! and he takes {player_two['points']} candies")
 
 # Задача №4
 # def rle_code(data):
