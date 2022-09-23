@@ -168,7 +168,6 @@ import random
 #                     break
 #             else:
 #                 print('Wrong Enter. Please Enter 1..9')
-#     print(data)
 #     return data
 #
 #
@@ -222,7 +221,7 @@ import random
 #     winner = check_winner(step, current_step)
 #     if winner:
 #         break
-#     print('checking winner ', winner)
+
 # Задача №4
 # def rle_code(data):
 #     encoding_data = ''
